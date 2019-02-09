@@ -46,7 +46,7 @@ function Application (props) {
 }
 
 Application.propTypes = {
-    title: React.PropTypes.string, //defines propTypes as with lower case p, React definition is in upper case
+    title: React.PropTypes.string.isRequired, //defines propTypes as with lower case p, React definition is in upper case
 }
 
-ReactDOM.render(<Application title="My Scoreboard"/>, document.getElementById("container"));
+ReactDOM.render(<Application />, document.getElementById("container"));
