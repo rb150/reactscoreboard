@@ -46,7 +46,13 @@ function Application (props) {
 }
 
 Application.propTypes = {
-    title: React.PropTypes.string.isRequired, //defines propTypes as with lower case p, React definition is in upper case
-}
+    title: React.PropTypes.string, //defines propTypes as with lower case p, React definition is in upper case
+};
+
+Application.defaultProps = { //makes .isRequired unnecessary in above definition. Still works though.
+    title: "Scoreboard"
+};
+
+
 
 ReactDOM.render(<Application />, document.getElementById("container"));
