@@ -1,10 +1,21 @@
+function Header(props) {
+    return (
+            /*header*/
+            <div className="header">
+            <h1>{props.title}</h1>
+            </div>
+    );
+}
+
+Header.propTypes = {
+    title: React.PropTypes.string.isRequired, //.isRequired here, because it always requires a value?
+};
+
+
 function Application (props) {
     return (
         <div className="scoreboard">
-            {/*header*/}
-            <div className="header">
-                <h1>{props.title}</h1>
-            </div>
+            <Header title={props.title}/>
             {/*players, scores, plus/minus*/}
             <div className="players">
                 {/*player*/}
@@ -52,7 +63,3 @@ Application.propTypes = {
 Application.defaultProps = { //makes .isRequired unnecessary in above definition. Still works though.
     title: "Scoreboard"
 };
-
-
-
-ReactDOM.render(<Application />, document.getElementById("container"));
