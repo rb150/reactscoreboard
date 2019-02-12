@@ -1,16 +1,18 @@
-
 var PLAYERS = [
     {
         name: "someone",
         score: 10,
+        id: 1,
     },
     {
         name: "aguy",
         score: 20,
+        id: 2,
     },
     {
         name: "person",
         score: 30,
+        id: 3,
     },
 ]
 
@@ -27,20 +29,39 @@ Header.propTypes = {
     title: React.PropTypes.string.isRequired, //.isRequired here, because it always requires a value?
 };
 
-function Counter(props) {
+var Counter = React.createClass({
+    propTypes: {},
+
+    incrementScore: function(e) {
+        this.setState({
+            score : (this.state.score + 1)
+        })
+    },
+
+    decrementScore: function(e) {
+        this.setState({
+            score : (this.state.score - 1)
+        })
+    },
+
+    getInitialState: function() {
+        return {
+            score: 0,
+        }
+    },
+
+   render: function () {
     return (
         //Counter
         <div className="counter">
-            <button className="counter-action decrement"> - </button>
-            <div className="counter-score">{props.score}</div>
-            <button className="counter-action increment"> + </button>   
+            <button className="counter-action decrement" onClick={this.decrementScore}> - </button>
+            <div className="counter-score">{this.state.score}</div>
+            <button className="counter-action increment" onClick={this.incrementScore}> + </button>   
         </div>
     );
-}
+   } 
+});
 
-Counter.propTypes = {
-    score: React.PropTypes.number.isRequired
-}
 
 function Player(props) {
     return (
@@ -52,7 +73,7 @@ function Player(props) {
         {/*scores*/}
         <div className="player-score">
             {/*counter*/}
-            <Counter score={props.score}/>
+            <Counter />
         </div>
     </div>
     );
@@ -71,7 +92,7 @@ function Application (props) {
             <div className="players">
                 {/*player*/}
                 {props.players.map(function(player) {
-                    return <Player name={player.name} score={player.score} />
+                    return <Player name={player.name} score={player.score} key={player.id} />
                 })}
 
             </div>
@@ -85,7 +106,9 @@ Application.propTypes = {
     players: React.PropTypes.arrayOf(React.PropTypes.shape({
         name: React.PropTypes.string.isRequired,
         score: React.PropTypes.number.isRequired,
-    })).isRequired
+        id: React.PropTypes.number.isRequired,
+    })).isRequired,
+    
 };
 
 Application.defaultProps = { //makes .isRequired unnecessary in above definition. Still works though.
