@@ -41,7 +41,13 @@ Put propTypes in component class. When doing component classes, it is easier to 
 score8: Use state management mechanism in React (not as good as state management tools from the community).
 There are libraries to help manage state (flux, redux, etc.).
 Create getInitialState() method to set counter state.  Add to counter class.  Replace "props. in this.props.score with "state"
-Since we don't need props, remove from propTypes (can still keep object empty). Update player function to no longer pass score in <Counter/>*/
+Since we don't need props, remove from propTypes (can still keep object empty). Update player function to no longer pass score in <Counter/>
+
+score9: Make app capable of changing scores by increment/decrement.
+create increment function (incrementScore) inside Counter class.  Pass incrementScore to onClick (native DOM component in React contain these event handlers)
+Add onClick to button element in counter function.  Use this.incrementScore.  When creating incrementScore function, use setState() method instead of this.state.score += 1
+since setState() lets React know to re-render itself. Does not work if "this" is not used.
+decrementScore function also created in same manner as incrementScore.*/
 
 var PLAYERS = [
     {
@@ -77,6 +83,18 @@ Header.propTypes = {
 var Counter = React.createClass({
     propTypes: {},
 
+    incrementScore: function(e) {
+        this.setState({
+            score : (this.state.score + 1)
+        })
+    },
+
+    decrementScore: function(e) {
+        this.setState({
+            score : (this.state.score - 1)
+        })
+    },
+
     getInitialState: function() {
         return {
             score: 0,
@@ -87,9 +105,9 @@ var Counter = React.createClass({
     return (
         //Counter
         <div className="counter">
-            <button className="counter-action decrement"> - </button>
+            <button className="counter-action decrement" onClick={this.decrementScore}> - </button>
             <div className="counter-score">{this.state.score}</div>
-            <button className="counter-action increment"> + </button>   
+            <button className="counter-action increment" onClick={this.incrementScore}> + </button>   
         </div>
     );
    } 
