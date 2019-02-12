@@ -1,3 +1,4 @@
+
 function Header(props) {
     return (
             /*header*/
@@ -63,3 +64,7 @@ Application.propTypes = {
 Application.defaultProps = { //makes .isRequired unnecessary in above definition. Still works though.
     title: "Scoreboard"
 };
+
+
+
+ReactDOM.render(<Application />, document.getElementById("container"));
